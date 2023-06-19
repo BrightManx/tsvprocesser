@@ -23,7 +23,7 @@ def process_mean_std(tsv):
 
     # Sort values
     df = df.sort_values(['cell_name', 'cell_number', 'day'])
-    print(df.columns)
+
     # Create final DF
     n1 = 4 * df.cell_number.unique().shape[0]
     final = df.loc[::n1, ['cell_name', 'day']].sort_values(by=['cell_name', 'day'])
