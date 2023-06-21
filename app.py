@@ -24,4 +24,6 @@ if tsv is None:
     st.title('Upload a file to proceed')
 else:
     file = process_n_nuc(tsv, cof = cof) if action == 'Number of Nuclei' else process_mean_std(tsv)
-    st.download_button(f'Download the "{action}" processed file', file.to_csv(), 'processed.csv')
+
+    name = tsv.name.split('.')[0]
+    st.download_button(f'Download the "{action}" processed file', file.to_csv(), f'{name}_processed.csv')
