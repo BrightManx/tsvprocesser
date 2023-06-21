@@ -13,7 +13,9 @@ st.write("""
 """)
 
 tsv = st.file_uploader('Choose a file')
-action = st.selectbox('What processing would you like to carry out?', ['n_nuc', 'mean_std'])
+action = st.selectbox('What processing would you like to carry out?', ['Number of Nuclei', 'Nuclei Area Mean / StD'])
+if action == 'Number of Nuclei': 
+    cof = st.text_input('Column of Interest', value = 'Nuclei - Number of Objects')
 
 st.write('#')
 st.write('#')
@@ -21,5 +23,5 @@ st.write('#')
 if tsv is None:
     st.title('Upload a file to proceed')
 else:
-    file = process_n_nuc(tsv) if action == 'n_nuc' else process_mean_std(tsv)
-    st.download_button(f'Download the {action} processed file', file.to_csv(), 'processed.csv')
+    file = process_n_nuc(tsv, cof = cof) if action == 'Number of Nuclei' else process_mean_std(tsv)
+    st.download_button(f'Download the "{action}" processed file', file.to_csv(), 'processed.csv')
